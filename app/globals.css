@@ -32,6 +32,11 @@ body {
   }
 }
 
+header{
+  background: rgb(0,0,0);
+background: linear-gradient(256deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6404936974789917) 0%);
+}
+
 
 .home-box-1{
   background: rgb(209,207,207);
@@ -46,6 +51,10 @@ background: linear-gradient(320deg, rgba(209,207,207,0) 0%, rgba(0,0,0,0.7609418
 .movie-page{
   background: rgb(0,0,0);
   background: linear-gradient(196deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8141631652661064) 61%, rgba(0,0,0,1) 71%);
+}
+
+.similar-movies{
+  
 }
 
 .bgimg{
