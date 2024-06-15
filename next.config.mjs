@@ -17,12 +17,19 @@ const nextConfig = {
             "www.telegraph.co.uk",
             "assets3.thrillist.com",
             "miro.medium.com",
+            "mydirtsheet.com",
+            "play-lh.googleusercontent.com",
+            "www.alternateending.com",
+            "i.guim.co.uk",
+            "preview.redd.it",
+            "amc-theatres-res.cloudinary.com",
+            "rukminim2.flixcart.com",
+            "encrypted-tbn0.gstatic.com",
             "",
             "",
             "",
             "",
-            "",
-            "",
+
             
 
         ]

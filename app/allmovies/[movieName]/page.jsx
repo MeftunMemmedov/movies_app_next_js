@@ -1,11 +1,11 @@
 'use client'
-import { MovieContext } from '@/app/context/MovieContext'
+import { MovieContext } from '../../../context/MovieContext'
+import SingleMovie from '../../../components/SingleMovie';
 import Image from 'next/image'
 import React, { useContext, useEffect, useState } from 'react'
 import { LiaImdb } from "react-icons/lia";
 import { FaRegBookmark, FaPlay } from "react-icons/fa";
 import Link from 'next/link';
-import SingleMovie from '@/app/components/SingleMovie';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -56,6 +56,7 @@ const MovieDetails = ({params}) => {
    useEffect(()=>{
       getMovieByName()
       getAllContents()
+      window.scrollTo(0,0)
    },[])
 
     
@@ -63,16 +64,24 @@ const MovieDetails = ({params}) => {
     <div className=''>
     <div className='relative movie-page lg:h-[100vh] h-[300vh] md:h-[100vh] '>
       <div className='w-full h-full movie-page absolute z-10'></div>
-      <Image src={movieDetails?.poster_bg} width={1000} height={900} className='w-full blur-2xl bgimg'/>
+      <Image 
+      src={movieDetails?.poster_bg} 
+      width={1000} height={400} 
+      className='w-full blur bgimg'
+      />
       <div className=' absolute top-10 w-full shadow-[100px]'>
         <div className='lg:container md:pl-14 mx-auto flex md:flex-row flex-col justify-around absolute z-20'>
           <div className='sm:w-full md:w-1/4 relative py-10 '>
-            <Image src={movieDetails?.poster} width={300} height={300} className='w-full'/>
+            <Image 
+            src={movieDetails?.poster} 
+            width={300} 
+            height={300} 
+            className='w-full'/>
           </div>
           <div className='md:w-3/4 w-full p-10 '>
             <h2 className='text-4xl font-bold mb-1'>{movieDetails?.title}</h2>
             <p className='mb-4'>Directed by {movieDetails?.director.map((director)=>{return <Link href={`/directors/${director}`}>{director}</Link>})}</p>
-            <p className='mb-2'>{movieDetails?.year}|{movieDetails?.isAdult?'18+':''}</p>
+            <p className='mb-2'>{movieDetails?.year}</p>
             <div className='flex mb-2'>
               {movieDetails?.genre.map((genre)=>{return <h4 className='mr-2'>{genre}</h4>})}
             </div>
@@ -91,13 +100,16 @@ const MovieDetails = ({params}) => {
       </div>
     </div>
 
-    <div className='bg-black relative '>
+    <div className='bg-black relative h-[400px]'>
       <div className='flex justify-around container m-auto'>
         {
           movieDetails?.images.map((img)=>{
             return (
               <div className='w-[32%] h-64  relative '>
-                  <Image src={img} fill objectFit='cover'/>
+                  <Image 
+                  src={img} 
+                  fill 
+                  objectFit='cover'/>
               </div>
             )
           })
@@ -105,7 +117,7 @@ const MovieDetails = ({params}) => {
       </div>
     </div>
 
-    <div className='relative w-full bg-black h-[90vh] py-16 my-40'>
+    <div className='relative w-full bg-black h-[100vh] py-16 '>
       <h2 className='text-4xl font-bold ml-5'>Similar to {movieDetails?.title}</h2>
       <div className='container m-auto'>    
       <Carousel responsive={responsive} ssr className=''>

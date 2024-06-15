@@ -1,5 +1,5 @@
 import React from 'react'
-import { MovieContextProvider } from './context/MovieContext'
+import { MovieContextProvider } from '../context/MovieContext'
 
 const Providers = ({children}) => {
   return (

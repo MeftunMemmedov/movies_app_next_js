@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
+import Header from '../components/Header';
 import Providers from "./Providers";
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 

@@ -3,7 +3,7 @@ import localFont from 'next/font/local'
 import { LiaImdb } from "react-icons/lia";
 import Link from 'next/link';
 
-const titleFont = localFont({ src: '../../public/fonts/ArchivoBlack-Regular.ttf' })
+const titleFont = localFont({ src: '../public/fonts/ArchivoBlack-Regular.ttf' })
 
 const SingleMovie = ({movie}) => {
   return (

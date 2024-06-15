@@ -1,13 +1,11 @@
 'use client'
 import React from 'react'
 import { useContext, useEffect } from 'react'
-import { MovieContext } from '../context/MovieContext'
 import localFont from 'next/font/local'
-import SingleMovie from '../components/SingleMovie';
+import { MovieContext } from '../../context/MovieContext'
+import SingleMovie from '../../components/SingleMovie';
 import Image from 'next/image'
 
-import camera1 from '../../public/images/camera1.png'
-import camera2 from '../../public/images/camera3.png'
 const titleFont = localFont({ src: '../../public/fonts/ArchivoBlack-Regular.ttf' })
 
 const AllMovies = () => {
@@ -18,11 +16,12 @@ const AllMovies = () => {
     useEffect(()=>{
         getAllContents()
     },[])
+    
 
   return (
     <div className=''>
         <div>
-            <h2 className='text-center'>All Movies</h2>
+            {/* <h2 className='text-center'>All Movies</h2> */}
         </div>
         <div className='container m-auto flex flex-wrap lg:gap-x-[25.5px] md:gap-x-[50px] lg:justify-normal justify-center py-10'>
             {

@@ -1,22 +1,28 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaSearch } from "react-icons/fa";
 import localFont from 'next/font/local'
 import { BiMoviePlay } from "react-icons/bi";
+import { BsFillCameraReelsFill } from "react-icons/bs";
+import { MovieContext } from '@/context/MovieContext';
 
 
-const logoFont=localFont({ src: '../../public/fonts/JosefinSans-Bold.ttf' })
+const logoFont=localFont({ src: '../public/fonts/JosefinSans-Bold.ttf' })
 
 
 const Header = () => {
+  const [movies, setMovies, getAllContents]=useContext(MovieContext)
   const [searchInput, setSearchInput]=useState('')
   const [searchFocus, setSearchFocus]=useState(false)
   const [searchEmpty, setSearchEmpty]=useState(true)
 
+
+  const searchResults=movies.filter((movie)=>movie.title==searchInput)
   useEffect(()=>{
    searchInput!==''?setSearchEmpty(false):setSearchEmpty(true)
 }, [searchInput])
+
 
   return (
     <>
@@ -40,12 +46,16 @@ const Header = () => {
                 onFocus={()=>setSearchFocus(true)} 
                 onBlur={()=>setSearchFocus(false)} 
               />
+              {/* <div className='search-results absoulte border h-96 w-[250px] bg-black'>
+                search results
+              </div> */}
             </div>
           </div>
 
           <div className='lg:w-2/5 lg:block hidden '>
-            <nav className=' h-full flex items-center'>
+            <nav className=' h-full flex items-center flex justify-around'>
               <Link href={'/allmovies'} className='border border-slate-600 p-2 rounded-3xl'><BiMoviePlay className='inline mb-1 mx-1' size={20}/>All Movies</Link>
+              <Link href={'/category'} className='border border-slate-600 p-2 rounded-3xl'><BsFillCameraReelsFill className='inline mb-1 mx-1' size={20}/>Categories</Link>
             </nav>
           </div>
 
