@@ -1,11 +1,11 @@
 'use client'
 import Image from 'next/image'
 import React from 'react'
-import camera1 from '../../public/images/camera1.png'
-import camera2 from '../../public/images/camera3.png'
+import camera1 from '../public/images/camera1.png'
+import camera2 from '../public/images/camera3.png'
 
 
-const loading = () => {
+const Loading = () => {
   return (
     <div className='h-[100vh] flex justify-center flex-col items-center '>
             <div className='relative h-1/2 w-1/5  flex justify-center items-center'>
@@ -18,4 +18,4 @@ const loading = () => {
   )
 }
 
-export default loading
+export default Loading

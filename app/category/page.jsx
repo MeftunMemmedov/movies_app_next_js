@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 
 const Category = () => {
 
-    const [movies, setMovies, getAllContents]=useContext(MovieContext)
+    const [searchInput, setSearchInput]=useContext(MovieContext)
     
     const categories = [
         {
@@ -49,8 +49,8 @@ const Category = () => {
 
 
 
-    useEffect(()=>{
-        getAllContents()
+    useEffect(()=>{    
+        setSearchInput('')
     },[])
   return (
     <div className=''>

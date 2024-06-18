@@ -2,15 +2,20 @@ import React from 'react'
 import localFont from 'next/font/local'
 import { LiaImdb } from "react-icons/lia";
 import Link from 'next/link';
+import WatchListBtn from './WatchListBtn';
 
 const titleFont = localFont({ src: '../public/fonts/ArchivoBlack-Regular.ttf' })
 
 const SingleMovie = ({movie}) => {
   return (
-    <div className='w-[300px] h-[450px] my-5 relative overflow-hidden border border-slate-600 hover:border-white hover:border-dashed transition duration-500'>
+<div className='flex justify-center items-center'>
+    <div className='w-11/12 my-5 relative overflow-hidden border border-slate-600 hover:border-white hover:border-dashed transition duration-500'>
         <img src={movie.poster} className='w-full h-full object-cover movie-image'/>
 
         <div className={` absolute top-0  w-full h-full flex flex-col justify-center items-center movie-info opacity-0 hover:opacity-100 transition duration-500 px-1`}>
+            <div className=' w-full flex justify-end absolute top-0'>
+                <WatchListBtn movie={movie}/>
+            </div>
             <Link href={`/allmovies/${movie.title}`}>
                 <h2 className={`${titleFont.className} text-3xl font-bold text-center h-[150px] `}>{movie.title}</h2>
             </Link>
@@ -27,6 +32,7 @@ const SingleMovie = ({movie}) => {
                 </div>
         </div>
     </div>
+</div>
   )
 }
 

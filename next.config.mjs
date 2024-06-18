@@ -33,7 +33,8 @@ const nextConfig = {
             
 
         ]
-    }
+    },
+    
 };
 
 export default withNextVideo(nextConfig);

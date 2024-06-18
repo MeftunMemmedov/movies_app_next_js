@@ -1,24 +1,29 @@
 'use client'
 import SingleMovie from '@/components/SingleMovie'
 import { MovieContext } from '@/context/MovieContext'
+import { getAllMovies } from '@/redux/movieSlice'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const MoviesByCategory = ({params}) => {
     
-    const [movies, setMovies, getAllContents]=useContext(MovieContext)
+    const {movies}=useSelector(store=>store.movie)
+    const dispatch=useDispatch()
+
+    const [searchInput, setSearchInput]=useContext(MovieContext)
     const [categoryDescription, setCategoryDescription]=useState('')
-    // const [moviesByCategory, setMoviesByCategory]=useState([])
+
     const moviesByCategory=movies.filter((movie)=>movie.genre.includes(params.category.charAt(0).toUpperCase()+params.category.slice(1)))
     
-    // console.log(moviesByCategory)
+
     
 
 
     useEffect(()=>{
-        getAllContents()
-        
+        dispatch(getAllMovies())
+        setSearchInput('')
         if(params.category=='action'){
             setCategoryDescription("Welcome to the edge of your seat, because it's time to dive into the action. From classic westerns and war films to modern action hero adventures, it’s all right here on Plex.")
         }else if(params.category=='crime'){
