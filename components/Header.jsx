@@ -23,7 +23,7 @@ const [searchInput,setSearchInput]=useContext(MovieContext)
 const router=useRouter()
 // const [searchInput, setSearchInput]=useState('')
 const [searchFocus, setSearchFocus]=useState(false)
-
+const [searchBlur, setsearchBlur]=useState(searchInput==''?true:false)
 const {movies, isLoading}=useSelector(store=>store.movie)  
 const {persons}=useSelector(store=>store.person)  
 const {users, isLoggedIn, user}=useSelector(store=>store.user)
@@ -69,12 +69,15 @@ useEffect(()=>{
                 type='search' 
                 id='search'
                 placeholder='search...'
+                
                 onChange={(e)=>setSearchInput(e.target.value.toLocaleLowerCase())}            
                 className='w-full h-full rounded-3xl bg-zinc-800 focus:bg-white focus:outline-0 focus:text-black px-5' 
                 onFocus={()=>setSearchFocus(true)} 
-                onBlur={()=>setSearchFocus(false)} 
+                onBlur={()=>setTimeout(() => {
+                  setSearchFocus(false)
+                }, 500)} 
               />
-              <div className={`${searchInput=='' || !searchFocus?'hidden':''} search-results absoulte px-2 h-96 w-[400px] bg-slate-800 overflow-y-scroll`}>
+              <div className={`${searchInput==''|| !searchFocus?'hidden':''} search-results absoulte px-2 h-96 w-[400px] bg-slate-800 overflow-y-scroll`} >
                   <h2 className='font-bold text-orange-400'>Movies</h2>
                   {searchMovieResults.length==0?
                     <h2 className='text-slate-600 py-2'>Not Found</h2>

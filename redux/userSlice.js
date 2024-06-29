@@ -58,7 +58,7 @@ export const userSlice=createSlice({
         users:[],
         user:{},
         watchList:[],
-        isLoadingWatchList:false
+        isLoadingWatchList:false,
     },
     reducers:{
         setIsLoggedIn:(state,action)=>{

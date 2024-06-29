@@ -26,13 +26,24 @@ const SignIn = () => {
         })
     }
 
+    const watchlistFromLS=JSON.parse(localStorage.getItem(`watchlist`))
+    let userInfo=users.find((user)=>user.email==input.email)
     
+    const createNewWatchList=()=>{
+        watchlistFromLS.push({user:userInfo.name, watchlist:[]})
+        localStorage.setItem('watchlist',JSON.stringify( watchlistFromLS))
+    }
 
     const handleSubmit=async(e)=>{
         e.preventDefault()
         if(users.some((user)=>user.email==input.email && user.password==input.password)){
-            let userInfo=users.find((user)=>user.email==input.email)
             localStorage.setItem('userId',userInfo.id)
+            // if(localStorage.getItem('watchlist')&&watchlistFromLS.some((wl)=>wl.user!=userInfo.name)){
+            //     createNewWatchList()
+            // }else if(!localStorage.getItem('watchlist')){
+            //     localStorage.setItem(`watchlist`,JSON.stringify([{user:userInfo.name, watchlist:[]}]))
+            // }
+            localStorage.setItem(`watchlist${userInfo.name}`, JSON.stringify([]))
             dispatch(setIsLoggedIn())
             router.replace('/')
         }else{

@@ -3,6 +3,8 @@ import localFont from 'next/font/local'
 import { LiaImdb } from "react-icons/lia";
 import Link from 'next/link';
 import WatchListBtn from './WatchListBtn';
+import WLLS from './WLLS';
+import WatchListBtnLS from './WatchListBtnLS';
 
 const titleFont = localFont({ src: '../public/fonts/ArchivoBlack-Regular.ttf' })
 
@@ -14,7 +16,9 @@ const SingleMovie = ({movie}) => {
 
         <div className={` absolute top-0  w-full h-full flex flex-col justify-center items-center movie-info opacity-0 hover:opacity-100 transition duration-500 px-1`}>
             <div className=' w-full flex justify-end absolute top-0'>
-                <WatchListBtn movie={movie}/>
+                {/* <WatchListBtn movie={movie}/> */}
+                {/* <WatchListBtnLS movie={movie}/> */}
+                <WLLS movie={movie}/>
             </div>
             <Link href={`/allmovies/${movie.title}`}>
                 <h2 className={`${titleFont.className} text-3xl font-bold text-center h-[150px] `}>{movie.title}</h2>

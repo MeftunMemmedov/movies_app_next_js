@@ -6,15 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 const WatchList = () => {
-    const {watchList}=useSelector(store=>store.user)
+    const {watchList,user}=useSelector(store=>store.user)
     const dispatch=useDispatch()
     const userId=localStorage.getItem('userId')
+    const userWL=JSON.parse(localStorage.getItem(`watchlist${user?.name}`))
 
     console.log(watchList)
     useEffect(()=>{
         dispatch(getWatchList(userId))
     },[watchList])
-    const isEmpty=watchList.length==0
+    // const isEmpty=watchList.length==0
+    const isEmpty=userWL?.length==0
 
     if(isEmpty) return <> <div className=' h-screen flex justify-center items-center'><h2 className='text-orange-500 text-5xl'>Empty WatchList</h2></div></>
     
@@ -22,7 +24,7 @@ const WatchList = () => {
     <div>
       <div className='grid lg:grid-cols-4 md:grid-cols-3'>
        { 
-        watchList.map((movie)=>{
+        userWL?.map((movie)=>{
             return <SingleMovie movie={movie}/>
         })
        }

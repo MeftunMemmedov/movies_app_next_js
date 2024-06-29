@@ -1,4 +1,5 @@
 'use client'
+//api version of wacthlist 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FaRegBookmark, FaPlay } from "react-icons/fa";

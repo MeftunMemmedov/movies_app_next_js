@@ -4,10 +4,13 @@ import video2 from '../videos/0609.mp4'
 import Link from 'next/link';
 import { useContext, useEffect } from 'react';
 import { MovieContext } from '@/context/MovieContext';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 import SingleMovie from '@/components/SingleMovie';
 import 'react-multi-carousel/lib/styles.css';
+import { getAllMovies } from '@/redux/movieSlice';
+import { getAllPersons } from '@/redux/personSlice';
+import { getWatchList } from '@/redux/userSlice';
 
 
 
@@ -32,16 +35,27 @@ const responsive = {
 
 export default function Home() {
   const [searchInput, setSearchInput]=useContext(MovieContext)
-  // const {watchList}=useSelector(store=>store.user)
+  const {watchList, user}=useSelector(store=>store.user)
   const {isLoggedIn}=useSelector(store=>store.user)
   const {movies}=useSelector(store=>store.movie)
-
+  const dispatch=useDispatch()
   const topMovies=movies.filter((movie)=>movie.rating>7)
+  const userId=localStorage.getItem('userId')
+
   useEffect(()=>{
     setSearchInput('')
-
+    
   },[])
-
+  
+  useEffect(()=>{
+    dispatch(getWatchList(userId))
+    setTimeout(()=>{
+      localStorage.setItem(`watchlist${user?.name}`, JSON.stringify(watchList))
+    },5000)
+    setTimeout(()=>{
+      localStorage.removeItem(`watchlistundefined`)
+    },5000)
+  },[watchList])
   // {
   //   "characterName":"",
   //   "realName":""

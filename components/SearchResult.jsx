@@ -6,7 +6,7 @@ import { TbPointFilled } from "react-icons/tb";
 
 const SearchResult = ({result, setSearchInput}) => {
   return (
-      <Link href={result.title?`/allmovies/${result.title}`:`/persons/${result.name}`} className='' onClick={()=>setSearchInput('')}>
+      <Link href={result.title?`/allmovies/${result.title}`:`/persons/${result.name}`} className='' >
         <div className=' h-16 flex my-1 hover:bg-slate-500'>
         <div className=' w-[12%] relative'>
             <Image src={result.poster||result.image} objectFit='cover' fill/>

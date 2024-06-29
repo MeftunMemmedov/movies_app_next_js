@@ -13,6 +13,7 @@ import { getAllMovies, getMovieByName } from '@/redux/movieSlice';
 import Loading from '@/components/Loading';
 import axios from 'axios';
 import { addToWatchList, getWatchList } from '@/redux/userSlice';
+import WLLS from '@/components/WLLS';
 
 
 const responsive = {
@@ -36,8 +37,10 @@ const responsive = {
 
 const MovieDetails = ({params}) => {
     const [searchInput, setSearchInput]=useContext(MovieContext)
+    const {user}=useSelector(store=>store.user)
     // const [watchList, setWatchList]=useState([])
 
+    const userWL=JSON.parse(localStorage.getItem(`watchlist${user?.name}`))
     const movieName=decodeURI(params.movieName)
     const {movies, movie, isLoading}=useSelector(store=>store.movie)
     const {watchList}=useSelector(store=>store.user)
@@ -65,44 +68,44 @@ const MovieDetails = ({params}) => {
 
     
 
-    const addToWatchList=async()=>{
-      const data={
-        watchlist:[...watchList, singleMovie]
-      }
+    // const addToWatchList=async()=>{
+    //   const data={
+    //     watchlist:[...watchList, singleMovie]
+    //   }
 
-      await axios.patch(`https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/Movies-Users?id=eq.${userId}&select=*`, data,{
-        headers:{
-          apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
-          Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
-          "Content-Type": "application/json"
-        }
-      })
-    }
+    //   await axios.patch(`https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/Movies-Users?id=eq.${userId}&select=*`, data,{
+    //     headers:{
+    //       apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
+    //       Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
+    //       "Content-Type": "application/json"
+    //     }
+    //   })
+    // }
 
-    const removeFromWatchList=async(targetId)=>{
-      const updatedWatchList = watchList.filter((item) => item.id !== targetId)
+    // const removeFromWatchList=async(targetId)=>{
+    //   const updatedWatchList = watchList.filter((item) => item.id !== targetId)
 
-      const data={
-        watchlist:updatedWatchList
-      }
+    //   const data={
+    //     watchlist:updatedWatchList
+    //   }
 
-      await axios.patch(`https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/Movies-Users?id=eq.${userId}&select=*`, data,{
-        headers:{
-          apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
-          Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
-          "Content-Type": "application/json"
-        }
-      })
-    }
-    let checkWatchList=watchList.some((movie)=>movie?.id==singleMovie?.id)
+    //   await axios.patch(`https://flvxlsycpoxwclnqfrvr.supabase.co/rest/v1/Movies-Users?id=eq.${userId}&select=*`, data,{
+    //     headers:{
+    //       apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
+    //       Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsdnhsc3ljcG94d2NsbnFmcnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkxMjM4NDAsImV4cCI6MjAyNDY5OTg0MH0.6_-pdewIM3-_Ai2IGf1yhlOjeWZU9rta-l7oN35FDUs',
+    //       "Content-Type": "application/json"
+    //     }
+    //   })
+    // }
+    // let checkWatchList=watchList.some((movie)=>movie?.id==singleMovie?.id)
 
-    const toggleWatchList=(movieId)=>{
-      if(checkWatchList){
-        removeFromWatchList(movieId)
-      }else {
-        addToWatchList()
-      }
-    }
+    // const toggleWatchList=(movieId)=>{
+    //   if(checkWatchList){
+    //     removeFromWatchList(movieId)
+    //   }else {
+    //     addToWatchList()
+    //   }
+    // }
     
     useEffect(()=>{
       dispatch(getMovieByName(movieName))
@@ -143,8 +146,9 @@ const MovieDetails = ({params}) => {
             <LiaImdb size={30} color='gold' className='inline mr-2'/><h5 className='font-bold'>{singleMovie?.rating}</h5>
            </div>
            <div className='my-10 flex'>
-            <Link href={`${singleMovie?.trailer_url}`} className='border rounded-3xl bg-white text-black p-2 mr-3'><FaPlay size={20} className='inline mx-1 mb-1'/>Watch Trailer</Link>
-            <button className='border rounded-3xl bg-white text-black p-2' onClick={()=>toggleWatchList(singleMovie?.id)}>{checkWatchList?<FaRegBookmark size={30} color='red'/>:<FaRegBookmark size={30} />}</button>
+            <Link href={`${singleMovie?.trailer_url}`} className='border rounded-3xl bg-white text-black p-2 mr-3 flex justify-around items-center'><FaPlay size={20} className='inline mx-1 mb-1'/>Watch Trailer</Link>
+            {/* <button className='border rounded-3xl bg-white text-black p-2' onClick={()=>toggleWatchList(singleMovie?.id)}>{checkWatchList?<FaRegBookmark size={30} color='red'/>:<FaRegBookmark size={30} />}</button> */}
+           <WLLS movie={singleMovie}/>
            </div>
            <div className=''>
             <p>{singleMovie?.description}</p>
